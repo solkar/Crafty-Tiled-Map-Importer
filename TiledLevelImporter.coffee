@@ -43,7 +43,7 @@ Crafty.c "TiledLevel",
                 #console.log "#{tile.x} #{tile.y}"
         return null
 
-    tiledLevel : (levelURL, drawType) ->
+    tiledLevel : (levelName,URL, drawType) ->
         $.ajax
             type: 'GET'
             url: levelURL
@@ -55,7 +55,7 @@ Crafty.c "TiledLevel",
                 {layers: lLayers, tilesets: tss} = level
                 drawType = drawType ? "Canvas"
                 tsImages = for ts in tss
-                    ts.image
+                    URL + ts.image
                 Crafty.load tsImages, =>
                     @makeTiles(ts, drawType) for ts in tss
                     @makeLayer(layer) for layer in lLayers
